@@ -56,8 +56,9 @@ const FilterDropdown = ({
   };
 
   const onSelectOption = (value: string) => {
-    setIsVisibleOptions(false);
+    onChangeSearchText(value);
     valueChange(value);
+    setIsVisibleOptions(false);
   };
 
   const onFocusSearch = () => {
@@ -75,6 +76,7 @@ const FilterDropdown = ({
         placeholder={placeholder}
         onChange={(e) => onChangeSearchText(e.target.value)}
         onFocus={onFocusSearch}
+        value={searchValue}
       />
       {isVisibleOptions && (
         <div className="options-container">
