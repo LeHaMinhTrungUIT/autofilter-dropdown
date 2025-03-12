@@ -1,24 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import Example1 from "./components/Example/example1";
+import Example2 from "./components/Example/example2";
 
 function App() {
+  const [data, setData] = useState([]);
+  const getData = async () =>
+    await fetch("https://jsonplaceholder.typicode.com/users");
+
+  useEffect(() => {
+    getData()
+      .then((data) => data.json())
+      .then((res) => setData(res));
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Example1 data={data} />
+      <br />
+      <Example2 data={data} />
     </div>
   );
 }
